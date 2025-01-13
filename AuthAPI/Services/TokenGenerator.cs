@@ -1,6 +1,10 @@
 ﻿using AuthAPI.Models;
 using AuthAPI.Services.IService;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace AuthAPI.Services
 {
@@ -15,7 +19,27 @@ namespace AuthAPI.Services
 
         public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
         {
-            throw new NotImplementedException();
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(jwtOption.Secret);
+
+            var claimList = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, applicationUser.UserName.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, applicationUser.FullName.ToString())
+            };
+
+            claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Audience = jwtOption.Audience,
+                Issuer = jwtOption.Issuer,
+                Subject = new ClaimsIdentity(claimList),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
         }
     }
 }
