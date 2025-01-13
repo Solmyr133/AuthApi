@@ -20,13 +20,27 @@ namespace AuthAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> LoginPost(LoginRequestDTO loginRequestDTO)
         {
-            return Ok();
+            var log = await auth.Login(loginRequestDTO);
+            
+            if (log != null)
+            {
+                return Ok(log);
+            }
+
+            return BadRequest();
         }
 
         [HttpPost("register")]
         public async Task<ActionResult> RegisterPost(RegisterRequestDTO registerRequestDTO)
         {
-            return Ok();
+            var result = await auth.Register(registerRequestDTO);
+
+            if (result == "")
+            {
+                return Ok(result);  
+            }
+
+            return BadRequest();
         }
     }
 }

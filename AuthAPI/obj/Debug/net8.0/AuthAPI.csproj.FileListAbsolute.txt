@@ -141,3 +141,4 @@ C:\Users\Tanulo\Desktop\tokentest\AuthAPI\AuthAPI\obj\Debug\net8.0\refint\AuthAP
 C:\Users\Tanulo\Desktop\tokentest\AuthAPI\AuthAPI\obj\Debug\net8.0\AuthAPI.pdb
 C:\Users\Tanulo\Desktop\tokentest\AuthAPI\AuthAPI\obj\Debug\net8.0\AuthAPI.genruntimeconfig.cache
 C:\Users\Tanulo\Desktop\tokentest\AuthAPI\AuthAPI\obj\Debug\net8.0\ref\AuthAPI.dll
+C:\Users\Tanulo\Desktop\tokentest\AuthAPI\AuthAPI\obj\Debug\net8.0\AuthAPI.sourcelink.json

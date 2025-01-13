@@ -2,6 +2,7 @@
 using AuthAPI.Models;
 using AuthAPI.Services;
 using AuthAPI.Services.IService;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuthAPI
 {
@@ -22,6 +23,8 @@ namespace AuthAPI
 
             builder.Services.AddScoped<IAuth, AuthService>();
             builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             var app = builder.Build();
 
