@@ -21,6 +21,7 @@ namespace AuthAPI
             builder.Services.AddDbContext<AppDbContext>();
 
             builder.Services.AddScoped<IAuth, AuthService>();
+            builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             var app = builder.Build();
 
